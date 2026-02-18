@@ -575,6 +575,163 @@ p {
   margin: 0;
 }
 
+.trust-cta-wrap {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+}
+
+.trust-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(87,119,255,0.28);
+  background: linear-gradient(135deg, rgba(13,13,155,0.06), rgba(56,207,242,0.08));
+  color: var(--praxo-blue);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+}
+
+.trust-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+}
+
+.trust-overlay.open {
+  display: block;
+}
+
+.trust-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 12, 44, 0.62);
+  backdrop-filter: blur(4px);
+}
+
+.trust-overlay-panel {
+  position: relative;
+  margin: 4vh auto 0;
+  width: min(920px, calc(100% - 32px));
+  max-height: 92vh;
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 28px 80px rgba(8, 14, 60, 0.28);
+  overflow: auto;
+}
+
+.trust-overlay-head {
+  padding: 24px 26px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.trust-overlay-head h3 {
+  margin: 6px 0 6px;
+}
+
+.trust-overlay-head p {
+  margin: 0;
+  max-width: 74ch;
+}
+
+.trust-overlay-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #FFFFFF;
+  color: var(--fg);
+  font-size: 1.2rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.trust-tabs {
+  display: flex;
+  gap: 10px;
+  padding: 14px 26px 0;
+  flex-wrap: wrap;
+}
+
+.trust-tab {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: var(--muted);
+  padding: 8px 14px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.trust-tab.active {
+  border-color: rgba(87,119,255,0.4);
+  background: rgba(87,119,255,0.1);
+  color: var(--praxo-blue);
+}
+
+.trust-tab-panels {
+  padding: 20px 26px 26px;
+}
+
+.trust-tab-panel {
+  display: none;
+}
+
+.trust-tab-panel.active {
+  display: block;
+}
+
+.trust-tab-panel h4 {
+  margin-bottom: 8px;
+}
+
+.trust-tab-panel p {
+  margin: 0 0 14px;
+  max-width: 78ch;
+}
+
+.trust-points {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.trust-points li {
+  padding-left: 16px;
+  position: relative;
+  color: var(--fg);
+}
+
+.trust-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.58em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--praxo-bright);
+}
+
+.trust-evidence {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 /* ─── CTA Slide ─── */
 .cta-slide {
   background: var(--praxo-blue);
@@ -1030,6 +1187,12 @@ p {
   .security-grid { grid-template-columns: 1fr; }
   .card-grid { grid-template-columns: 1fr; }
   .compare-grid, .resonance-grid { grid-template-columns: 1fr; }
+  .trust-overlay-head,
+  .trust-tabs,
+  .trust-tab-panels {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
 }
 
 /* ─── Scroll Animations ─── */
@@ -1205,8 +1368,64 @@ p {
         </div>
       </div>
     </div>
+    <div class="trust-cta-wrap fade-up delay-6">
+      <button type="button" class="trust-cta" id="open-trust-summary">
+        Open Trust Summary
+      </button>
+    </div>
   </div>
 </section>
+
+<div class="trust-overlay" id="trust-overlay" aria-hidden="true">
+  <div class="trust-overlay-backdrop" id="trust-overlay-backdrop"></div>
+  <div class="trust-overlay-panel" role="dialog" aria-modal="true" aria-labelledby="trust-overlay-title">
+    <div class="trust-overlay-head">
+      <div>
+        <div class="label">Trust &amp; Compliance</div>
+        <h3 id="trust-overlay-title">Foundational by design</h3>
+        <p>Praxo is built with clinical safety, data protection, and security controls from the ground up. We track what is implemented today, what is in progress, and the evidence behind each control.</p>
+      </div>
+      <button type="button" class="trust-overlay-close" id="close-trust-summary" aria-label="Close trust summary">&times;</button>
+    </div>
+    <div class="trust-tabs" role="tablist" aria-label="Trust summary sections">
+      <button type="button" class="trust-tab active" role="tab" aria-selected="true" data-trust-tab="clinical">Clinical Safety</button>
+      <button type="button" class="trust-tab" role="tab" aria-selected="false" data-trust-tab="privacy">Privacy</button>
+      <button type="button" class="trust-tab" role="tab" aria-selected="false" data-trust-tab="security">Security</button>
+    </div>
+    <div class="trust-tab-panels">
+      <section class="trust-tab-panel active" data-trust-panel="clinical">
+        <h4>Clinical safety is governed, not assumed.</h4>
+        <p>We maintain a formal clinical safety process so risks are identified early, reviewed consistently, and reduced before release.</p>
+        <ul class="trust-points">
+          <li>Defined safety ownership with Clinical Safety Officer accountability.</li>
+          <li>Active hazard log with scoring, controls, and tracked actions.</li>
+          <li>Clinical risk plan and safety case report aligned to DCB0129.</li>
+        </ul>
+        <div class="trust-evidence">Evidence base: safety case, hazard log, risk management plan, CSO appointment.</div>
+      </section>
+      <section class="trust-tab-panel" data-trust-panel="privacy">
+        <h4>Data protection is part of everyday operations.</h4>
+        <p>We map data use, retention, and responsibilities clearly so practices can operate with confidence and transparency.</p>
+        <ul class="trust-points">
+          <li>DPIA and lawful basis register maintained for key workflows.</li>
+          <li>Documented SAR, retention, and breach response processes.</li>
+          <li>Clear distinction between current controls and planned improvements.</li>
+        </ul>
+        <div class="trust-evidence">Evidence base: DPIA, lawful basis register, SAR process, retention policy, breach response plan.</div>
+      </section>
+      <section class="trust-tab-panel" data-trust-panel="security">
+        <h4>Security controls are evidence-backed.</h4>
+        <p>Security coverage is tied to concrete implementation evidence, with open tracking of gaps and remediation ownership.</p>
+        <ul class="trust-points">
+          <li>Access control and auditability built into core platform flows.</li>
+          <li>Evidence register links controls to code and operational references.</li>
+          <li>Gap checklist used to prioritise and verify hardening work.</li>
+        </ul>
+        <div class="trust-evidence">Evidence base: control evidence register, security checklist, compliance audit pack.</div>
+      </section>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════ SLIDE 3: HOW IT WORKS ═══════════════════════════════════════ -->
 <section class="slide" id="architecture">
@@ -1600,6 +1819,46 @@ const navObserver = new IntersectionObserver((entries) => {
 
 slides.forEach(slide => navObserver.observe(slide));
 
+// Trust overlay interactions
+const trustOverlay = document.getElementById('trust-overlay');
+const openTrustSummary = document.getElementById('open-trust-summary');
+const closeTrustSummary = document.getElementById('close-trust-summary');
+const trustBackdrop = document.getElementById('trust-overlay-backdrop');
+const trustTabs = document.querySelectorAll('.trust-tab');
+const trustPanels = document.querySelectorAll('.trust-tab-panel');
+
+const openTrustOverlay = () => {
+  if (!trustOverlay) return;
+  trustOverlay.classList.add('open');
+  trustOverlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+};
+
+const closeTrustOverlay = () => {
+  if (!trustOverlay) return;
+  trustOverlay.classList.remove('open');
+  trustOverlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+};
+
+if (openTrustSummary) openTrustSummary.addEventListener('click', openTrustOverlay);
+if (closeTrustSummary) closeTrustSummary.addEventListener('click', closeTrustOverlay);
+if (trustBackdrop) trustBackdrop.addEventListener('click', closeTrustOverlay);
+
+trustTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const selected = tab.dataset.trustTab;
+    trustTabs.forEach(t => {
+      const active = t === tab;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    trustPanels.forEach(panel => {
+      panel.classList.toggle('active', panel.dataset.trustPanel === selected);
+    });
+  });
+});
+
 // Generate dot grid colors
 const brandColors = ['#0D0D9B', '#5777FF', '#38CFF2', '#F8B6F9'];
 document.querySelectorAll('.dot-grid').forEach(grid => {
@@ -1615,6 +1874,15 @@ document.querySelectorAll('.dot-grid').forEach(grid => {
 
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && trustOverlay && trustOverlay.classList.contains('open')) {
+    closeTrustOverlay();
+    return;
+  }
+
+  if (trustOverlay && trustOverlay.classList.contains('open')) {
+    return;
+  }
+
   const slideIds = [...slides].map(s => s.id);
   const current = [...slides].findIndex(s => {
     const rect = s.getBoundingClientRect();
