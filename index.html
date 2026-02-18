@@ -302,45 +302,57 @@ p {
   grid-template-rows: repeat(5, 6px);
 }
 
-/* ─── Problem Slide ─── */
-.problem-list {
+/* ─── Story Blocks (Problem + Solution) ─── */
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.story-grid.balanced {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.story-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.story-block.problem {
+  border-left: 4px solid #E66;
+}
+
+.story-block.solution {
+  border-left: 4px solid var(--praxo-bright);
+}
+
+.story-role {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+  color: var(--praxo-blue);
+}
+
+.story-list {
   list-style: none;
-  margin-top: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  gap: 6px;
 }
 
-.problem-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  font-size: 1.15rem;
+.story-list li {
   color: var(--fg);
+  font-size: 0.92rem;
+  line-height: 1.35;
 }
 
-.problem-icon {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  background: #FEE;
-  color: #C44;
-}
-
-.problem-text strong {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-.problem-text span {
+.story-list li span {
   color: var(--muted);
-  font-size: 1rem;
 }
 
 /* ─── Click or Tell ─── */
@@ -853,6 +865,121 @@ p {
   background: linear-gradient(135deg, var(--praxo-blue), var(--praxo-bright));
 }
 
+/* ─── Comparison Slides: Narrative vs Matrix ─── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.compare-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.compare-card h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.compare-card p {
+  font-size: 0.9rem;
+  max-width: 100%;
+  margin: 0;
+}
+
+.resonance-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.resonance-card {
+  border-radius: 12px;
+  border: 1px solid #CFE6D4;
+  background: #F3FBF5;
+  padding: 16px;
+}
+
+.resonance-card h4 {
+  font-size: 0.95rem;
+  color: #156B3A;
+  margin-bottom: 8px;
+}
+
+.resonance-card p {
+  font-size: 0.88rem;
+  max-width: 100%;
+  margin: 0;
+}
+
+.map-wrap {
+  margin-top: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: auto;
+  background: var(--card);
+}
+
+.strategy-map {
+  min-width: 1020px;
+  display: grid;
+  grid-template-columns: 180px repeat(5, minmax(160px, 1fr));
+}
+
+.map-cell {
+  padding: 12px 14px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.map-cell.head {
+  background: #F3E2D9;
+  font-weight: 700;
+  color: #222;
+}
+
+.map-cell.rowhead {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.map-cell.pain {
+  background: #D7EDF8;
+}
+
+.map-cell.now {
+  background: #E4F3E3;
+}
+
+.map-cell p {
+  margin: 0;
+  font-size: 0.84rem;
+  max-width: 100%;
+}
+
+.praxo-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+.praxo-glyph img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 1024px) {
   .slide { padding: 40px 40px; }
@@ -863,6 +990,8 @@ p {
   .mode-divider { flex-direction: row; }
   .mode-divider::before, .mode-divider::after { width: 40px; height: 1px; }
   nav { display: none; }
+  .story-grid.balanced { grid-template-columns: 1fr; }
+  .compare-grid, .resonance-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 640px) {
@@ -870,6 +999,7 @@ p {
   .stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
   .security-grid { grid-template-columns: 1fr; }
   .card-grid { grid-template-columns: 1fr; }
+  .compare-grid, .resonance-grid { grid-template-columns: 1fr; }
 }
 
 /* ─── Scroll Animations ─── */
@@ -898,9 +1028,9 @@ p {
 <nav id="nav">
   <a href="#hero" title="Home"></a>
   <a href="#problem" title="The Problem"></a>
+  <a href="#approach-a" title="Approach A"></a>
   <a href="#solution" title="Praxo"></a>
   <a href="#click-or-tell" title="Click or Tell"></a>
-  <a href="#numbers" title="Impact"></a>
   <a href="#architecture" title="Architecture"></a>
   <a href="#security" title="Security"></a>
   <a href="#demo" title="Demo"></a>
@@ -975,7 +1105,7 @@ p {
     <p class="subtitle fade-up delay-1" style="max-width: 600px; margin: 0 auto;">AI-native practice management<br>for UK healthcare</p>
     <div class="mock-chat fade-up delay-2" style="max-width: 480px; margin: 40px auto 0;">
       <div class="prompt-icon"></div>
-      <span style="color: var(--muted);">Book Mrs. Patel with Dr. Khan next Tuesday at 2pm</span>
+      <span style="color: var(--muted);">Book Mr Fredericks with Dr. Chen next Tuesday at 2pm</span>
       <span class="cursor"></span>
     </div>
   </div>
@@ -986,37 +1116,37 @@ p {
   <div class="slide-inner two-col">
     <div class="two-col-text">
       <div class="label fade-up">The Problem</div>
-      <h2 class="fade-up delay-1">Practice management<br>is stuck in 2005</h2>
-      <ul class="problem-list">
-        <li class="fade-up delay-2">
-          <div class="problem-icon">!</div>
-          <div class="problem-text">
-            <strong>Endless clicking</strong>
-            <span>10 clicks and 3 screens to book a single appointment. Staff spend more time fighting software than caring for patients.</span>
-          </div>
-        </li>
-        <li class="fade-up delay-3">
-          <div class="problem-icon">!</div>
-          <div class="problem-text">
-            <strong>Siloed systems</strong>
-            <span>Separate tools for scheduling, billing, records, and comms. Nothing talks to each other. Data falls through the cracks.</span>
-          </div>
-        </li>
-        <li class="fade-up delay-4">
-          <div class="problem-icon">!</div>
-          <div class="problem-text">
-            <strong>No intelligence</strong>
-            <span>Legacy systems are glorified spreadsheets. No AI, no automation, no insight. Just data entry and manual workflows.</span>
-          </div>
-        </li>
-        <li class="fade-up delay-5">
-          <div class="problem-icon">!</div>
-          <div class="problem-text">
-            <strong>Compliance anxiety</strong>
-            <span>Audit trails are an afterthought. GDPR and NHS data standards are bolted on, not built in. One breach away from disaster.</span>
-          </div>
-        </li>
-      </ul>
+      <h2 class="fade-up delay-1">Every role needs something simple.<br>Today it is fragmented.</h2>
+      <div class="story-grid balanced">
+        <div class="story-block problem fade-up delay-2">
+          <div class="story-role">Patient</div>
+          <ul class="story-list">
+            <li>I want to submit an enquiry <span>and get a quick response.</span></li>
+            <li>I want to request, track, and be reminded about appointments <span>in one place.</span></li>
+          </ul>
+        </div>
+        <div class="story-block problem fade-up delay-3">
+          <div class="story-role">Secretary</div>
+          <ul class="story-list">
+            <li>I want patient records and enquiries to stay current <span>without duplicate entry.</span></li>
+            <li>I want to manage schedules, referrals, letters, and billing <span>from one workflow.</span></li>
+          </ul>
+        </div>
+        <div class="story-block problem fade-up delay-4">
+          <div class="story-role">Consultant</div>
+          <ul class="story-list">
+            <li>I want to review referrals, reports, and imaging <span>before the appointment.</span></li>
+            <li>I want to document plans and sign letters quickly <span>without admin delay.</span></li>
+          </ul>
+        </div>
+        <div class="story-block problem fade-up delay-5">
+          <div class="story-role">Owner</div>
+          <ul class="story-list">
+            <li>I want service, location, and telephony settings <span>centrally managed.</span></li>
+            <li>I want visibility of activity, audits, and invoicing <span>across the whole practice.</span></li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="fade-up delay-3">
       <div class="broken-illustration">
@@ -1067,29 +1197,95 @@ p {
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════ SLIDE 3A: APPROACH A (NARRATIVE) ═══════════════════════════════════════ -->
+<section class="slide" id="approach-a">
+  <div class="slide-inner">
+    <div style="text-align: center;">
+      <div class="label fade-up">Approach A</div>
+      <h2 class="fade-up delay-1">What. So what. Now what.<br><span class="highlight">Split into readable narrative blocks.</span></h2>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card fade-up delay-2">
+        <h3>Disparate Systems</h3>
+        <p>Multiple logins, vendors, and disconnected steps for one patient journey.</p>
+      </div>
+      <div class="compare-card fade-up delay-3">
+        <h3>Inefficient Working Practices</h3>
+        <p>Manual repetition across admin and clinical teams increases handling time.</p>
+      </div>
+      <div class="compare-card fade-up delay-3">
+        <h3>Challenges to Scale</h3>
+        <p>Automation demand is rising, but fragmentation slows execution and payback.</p>
+      </div>
+      <div class="compare-card fade-up delay-4">
+        <h3>Customer Experience &amp; Brand</h3>
+        <p>Inconsistent service delivery creates avoidable churn and weakens referrals.</p>
+      </div>
+      <div class="compare-card fade-up delay-4">
+        <h3>Working Remotely</h3>
+        <p>Remote coordination and onboarding are harder when systems are not unified.</p>
+      </div>
+    </div>
+    <div class="resonance-grid">
+      <div class="resonance-card fade-up delay-3">
+        <h4><span class="praxo-glyph" aria-label="Praxo" role="img"><img src="assets/glyph_bounded.svg" alt="" /></span></h4>
+        <p>One system, one login, and one governed data model for the whole practice.</p>
+      </div>
+      <div class="resonance-card fade-up delay-4">
+        <h4><span class="praxo-glyph" aria-label="Praxo" role="img"><img src="assets/glyph_bounded.svg" alt="" /></span></h4>
+        <p>AI and staff operate on shared context so work is done once, not twice.</p>
+      </div>
+      <div class="resonance-card fade-up delay-4">
+        <h4><span class="praxo-glyph" aria-label="Praxo" role="img"><img src="assets/glyph_bounded.svg" alt="" /></span></h4>
+        <p>Separate growth in revenue from growth in admin effort and overhead.</p>
+      </div>
+      <div class="resonance-card fade-up delay-5">
+        <h4><span class="praxo-glyph" aria-label="Praxo" role="img"><img src="assets/glyph_bounded.svg" alt="" /></span></h4>
+        <p>Improve patient and clinician experience as a core growth strategy, not an afterthought.</p>
+      </div>
+      <div class="resonance-card fade-up delay-5">
+        <h4><span class="praxo-glyph" aria-label="Praxo" role="img"><img src="assets/glyph_bounded.svg" alt="" /></span></h4>
+        <p>Standardise remote operations with auditable workflows and faster onboarding.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════════════════ SLIDE 3: THE SOLUTION ═══════════════════════════════════════ -->
 <section class="slide" id="solution">
   <div class="slide-inner two-col">
     <div class="two-col-text">
-      <div class="label fade-up">The Solution</div>
+      <div class="label fade-up">The Solution - <span class="praxo-glyph" aria-label="Praxo" role="img"><img src="assets/glyph_bounded.svg" alt="" /></span></div>
       <h2 class="fade-up delay-1">One platform.<br><span class="highlight">Everything connected.</span></h2>
-      <p class="subtitle fade-up delay-2" style="margin-top: 16px;">Praxo replaces the patchwork with a single, unified system where scheduling, patient records, billing, compliance, and AI assistance work together natively.</p>
-      <div class="card-grid" style="margin-top: 32px;">
-        <div class="card fade-up delay-3">
-          <h3>Scheduling</h3>
-          <p>Multi-clinician, multi-location scheduling with drag-and-drop, conflict prevention, and patient self-booking.</p>
+      <p class="subtitle fade-up delay-2" style="margin-top: 16px;">Praxo turns those same user stories into one joined workflow with clear ownership for every role.</p>
+      <div class="story-grid balanced" style="margin-top: 24px;">
+        <div class="story-block solution fade-up delay-3">
+          <div class="story-role">Patient Flow</div>
+          <ul class="story-list">
+            <li>Enquiries, self-booking, and reminders <span>run in one patient journey.</span></li>
+            <li>Referrals and test results can be uploaded and reviewed <span>before consultation.</span></li>
+          </ul>
         </div>
-        <div class="card fade-up delay-4">
-          <h3>Patient Records</h3>
-          <p>Encrypted PII, episode-based care journeys, and clinical notes with full audit trails.</p>
+        <div class="story-block solution fade-up delay-4">
+          <div class="story-role">Practice Ops</div>
+          <ul class="story-list">
+            <li>Secretaries manage records, schedules, letters, and comms <span>from one screen.</span></li>
+            <li>Invoicing and daily/weekly reporting are built in <span>for faster closeout.</span></li>
+          </ul>
         </div>
-        <div class="card fade-up delay-5">
-          <h3>Billing</h3>
-          <p>Invoicing, insurer fee schedules, payment tracking, credit notes, and VAT-aware line items.</p>
+        <div class="story-block solution fade-up delay-5">
+          <div class="story-role">Clinical Work</div>
+          <ul class="story-list">
+            <li>Consultants only see assigned patients <span>with referrals and imaging ready.</span></li>
+            <li>Clinical findings, plans, and e-signatures <span>are captured with full audit trail.</span></li>
+          </ul>
         </div>
-        <div class="card fade-up delay-6">
-          <h3>AI Assistant</h3>
-          <p>Natural language interface that understands your schedules, records, and workflows. Ask it anything.</p>
+        <div class="story-block solution fade-up delay-6">
+          <div class="story-role">Owner Control</div>
+          <ul class="story-list">
+            <li>Settings, services, locations, and booking pages <span>are centrally configured.</span></li>
+            <li>AI provider controls, audit logs, and financial visibility <span>are available platform-wide.</span></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -1166,35 +1362,6 @@ p {
         <p>Type or speak. "Confirm tomorrow's appointments" &mdash; done. Reduce 10 clicks to 10 words.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════ SLIDE 5: NUMBERS ═══════════════════════════════════════ -->
-<section class="slide" id="numbers">
-  <div class="slide-inner" style="text-align: center;">
-    <div class="label fade-up">Impact</div>
-    <h2 class="fade-up delay-1">Stop fighting your software.<br><span class="highlight">Start caring for patients.</span></h2>
-    <div class="stats-grid">
-      <div class="stat fade-up delay-2">
-        <div class="stat-value">80%</div>
-        <div class="stat-label">Less admin<br>per booking</div>
-      </div>
-      <div class="stat fade-up delay-3">
-        <div class="stat-value">24/7</div>
-        <div class="stat-label">Patient<br>self-service</div>
-      </div>
-      <div class="stat fade-up delay-4">
-        <div class="stat-value">100%</div>
-        <div class="stat-label">Actions<br>audited</div>
-      </div>
-      <div class="stat fade-up delay-5">
-        <div class="stat-value">~0</div>
-        <div class="stat-label">Minutes to<br>train new staff</div>
-      </div>
-    </div>
-    <p class="fade-up delay-6" style="margin: 48px auto 0; font-size: 1.05rem;">
-      Because the best interface is the one that gets out of the way.
-    </p>
   </div>
 </section>
 
