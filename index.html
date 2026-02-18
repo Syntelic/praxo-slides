@@ -871,13 +871,12 @@ p {
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  padding: 24px 0 8px;
 }
 
 .solution-shot::before {
   content: '';
   position: absolute;
-  inset: 2px -14px -8px;
+  inset: -14px;
   border-radius: 24px;
   background: radial-gradient(circle at 20% 20%, rgba(87,119,255,0.22), transparent 55%),
               radial-gradient(circle at 80% 80%, rgba(56,207,242,0.18), transparent 60%);
@@ -885,44 +884,12 @@ p {
   pointer-events: none;
 }
 
-.solution-shot-backdrop {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 90%;
-  height: 82%;
-  transform: translateX(-50%);
-  border-radius: 16px;
-  border: 1px solid rgba(87,119,255,0.14);
-  background: linear-gradient(160deg, rgba(255,255,255,0.58), rgba(241,245,255,0.35));
-  box-shadow: 0 10px 30px rgba(13,13,155,0.08);
-  overflow: hidden;
-  z-index: 1;
-}
-
-.solution-shot-backdrop::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, rgba(13,13,155,0.09) 0, rgba(13,13,155,0.09) 38px, transparent 38px),
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 16px,
-      rgba(87,119,255,0.08) 16px,
-      rgba(87,119,255,0.08) 18px
-    );
-  opacity: 0.42;
-}
-
 .solution-shot img {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   display: block;
-  width: 94%;
+  width: 100%;
   height: auto;
-  margin: 18px auto 0;
   border-radius: 18px;
   border: 1px solid rgba(87,119,255,0.18);
   box-shadow: 0 20px 50px rgba(13,13,155,0.16), 0 8px 22px rgba(13,13,155,0.1);
@@ -1329,7 +1296,7 @@ p {
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--praxo-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <h3 style="color: #1BA8CA;">AI Assistant Mode</h3>
-        <p>Type or speak. "Confirm tomorrow's appointments" &mdash; done. Reduce 10 clicks to 10 words.</p>
+        <p>Type or speak. "Confirm tomorrow's appointments for Dr. Chen " &mdash; done. Reduce 10 clicks to 10 words.</p>
       </div>
     </div>
   </div>
@@ -1515,7 +1482,6 @@ p {
     </div>
     <div class="fade-up delay-2">
       <figure class="solution-shot">
-        <div class="solution-shot-backdrop" aria-hidden="true"></div>
         <img src="assets/praxo-grab1.jpeg" alt="Praxo platform interface screenshot" />
       </figure>
     </div>
