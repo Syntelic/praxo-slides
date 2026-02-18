@@ -865,6 +865,35 @@ p {
   background: linear-gradient(135deg, var(--praxo-blue), var(--praxo-bright));
 }
 
+.solution-shot {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.solution-shot::before {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: 24px;
+  background: radial-gradient(circle at 20% 20%, rgba(87,119,255,0.22), transparent 55%),
+              radial-gradient(circle at 80% 80%, rgba(56,207,242,0.18), transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.solution-shot img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  border: 1px solid rgba(87,119,255,0.18);
+  box-shadow: 0 20px 50px rgba(13,13,155,0.16), 0 8px 22px rgba(13,13,155,0.1);
+}
+
 /* ─── Comparison Slides: Narrative vs Matrix ─── */
 .compare-grid {
   display: grid;
@@ -1451,49 +1480,9 @@ p {
       </div>
     </div>
     <div class="fade-up delay-2">
-      <div class="clean-illustration">
-        <div class="clean-window">
-          <div class="clean-window-header">
-            <div class="dots">
-              <div class="dot-w"></div>
-              <div class="dot-w"></div>
-              <div class="dot-w"></div>
-            </div>
-            <div class="title-bar">Praxo &mdash; Staff Portal</div>
-            <div style="width: 36px;"></div>
-          </div>
-          <div class="clean-window-body">
-            <div class="clean-sidebar">
-              <div class="clean-nav">
-                <div class="clean-nav-item active"></div>
-                <div class="clean-nav-item"></div>
-                <div class="clean-nav-item"></div>
-                <div class="clean-nav-item"></div>
-                <div class="clean-nav-item"></div>
-              </div>
-              <div class="clean-content">
-                <div class="clean-row clean-row-short" style="background: var(--praxo-blue); opacity: 0.15;"></div>
-                <div class="clean-card-row">
-                  <div class="clean-mini-card"></div>
-                  <div class="clean-mini-card"></div>
-                  <div class="clean-mini-card"></div>
-                </div>
-                <div style="margin-top: 8px;">
-                  <div class="clean-row clean-row-long"></div>
-                  <div class="clean-row clean-row-med" style="margin-top: 6px;"></div>
-                  <div class="clean-row clean-row-short" style="margin-top: 6px;"></div>
-                  <div class="clean-row clean-row-long" style="margin-top: 6px;"></div>
-                  <div class="clean-row clean-row-med" style="margin-top: 6px;"></div>
-                </div>
-                <div class="clean-chat-bar">
-                  <div class="clean-chat-input"></div>
-                  <div class="clean-chat-send"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <figure class="solution-shot">
+        <img src="assets/praxo-grab1.jpeg" alt="Praxo platform interface screenshot" />
+      </figure>
     </div>
   </div>
 </section>
