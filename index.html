@@ -356,6 +356,78 @@ p {
   color: var(--muted);
 }
 
+.problem-signals {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.problem-signal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid #E66;
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.problem-signal h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.problem-signal p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.proof-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.proof-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.proof-cell {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: var(--card);
+}
+
+.proof-cell.before {
+  border-left: 4px solid #E8B7B7;
+  background: #FFF8F8;
+}
+
+.proof-cell.after {
+  border-left: 4px solid var(--praxo-bright);
+  background: #F5F9FF;
+}
+
+.proof-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 5px;
+  color: var(--muted);
+}
+
+.proof-cell.after .proof-tag {
+  color: var(--praxo-blue);
+}
+
+.proof-cell p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
 /* ─── Click or Tell ─── */
 .dual-mode {
   display: grid;
@@ -1187,6 +1259,7 @@ p {
   .security-grid { grid-template-columns: 1fr; }
   .card-grid { grid-template-columns: 1fr; }
   .compare-grid, .resonance-grid { grid-template-columns: 1fr; }
+  .proof-row { grid-template-columns: 1fr; }
   .trust-overlay-head,
   .trust-tabs,
   .trust-tab-panels {
@@ -1442,7 +1515,7 @@ p {
         </div>
         <div class="arch-layer-content">
           <h3>Staff Portal, Clinician App &amp; Patient Booking</h3>
-          <p>Three tailored experiences, one unified platform. Real-time updates via WebSocket push.</p>
+          <p>Three tailored experiences, one unified platform. Real-time updates via secure API.</p>
           <div class="arch-tags">
             <span class="arch-tag">Web Portal</span>
             <span class="arch-tag">iOS App</span>
@@ -1480,10 +1553,10 @@ p {
         </div>
         <div class="arch-layer-content">
           <h3>Encrypted Data Layer</h3>
-          <p>Row-level security isolates every tenant. PII encrypted at rest. Immutable audit logs with 8-year retention.</p>
+          <p>Row-level security isolates every tenant and every record. All data are encrypted at rest. Immutable audit logs with 8-year retention.</p>
           <div class="arch-tags">
             <span class="arch-tag">Row-level security</span>
-            <span class="arch-tag">PII encryption</span>
+            <span class="arch-tag">Health data encryption</span>
             <span class="arch-tag">UK data residency</span>
             <span class="arch-tag">GDPR compliant</span>
           </div>
@@ -1580,35 +1653,20 @@ p {
   <div class="slide-inner two-col">
     <div class="two-col-text">
       <div class="label fade-up">The Problem</div>
-      <h2 class="fade-up delay-1">Every role needs something simple.<br>Today it is fragmented.</h2>
-      <div class="story-grid balanced">
-        <div class="story-block problem fade-up delay-2">
-          <div class="story-role">Patient</div>
-          <ul class="story-list">
-            <li>I want to submit an enquiry <span>and get a quick response.</span></li>
-            <li>I want to request, track, and be reminded about appointments <span>in one place.</span></li>
-          </ul>
+      <h2 class="fade-up delay-1">One patient journey.<br>Too many disconnected steps.</h2>
+      <p class="subtitle fade-up delay-2" style="margin-top: 14px;">The same information is re-entered, re-checked, and re-routed across different tools. That increases delay, inconsistency, and avoidable operational risk.</p>
+      <div class="problem-signals">
+        <div class="problem-signal fade-up delay-3">
+          <h3>Context is lost between handoffs</h3>
+          <p>Patient and booking details are repeated across inboxes, lists, and calls.</p>
         </div>
-        <div class="story-block problem fade-up delay-3">
-          <div class="story-role">Secretary</div>
-          <ul class="story-list">
-            <li>I want patient records and enquiries to stay current <span>without duplicate entry.</span></li>
-            <li>I want to manage schedules, referrals, letters, and billing <span>from one workflow.</span></li>
-          </ul>
+        <div class="problem-signal fade-up delay-4">
+          <h3>Admin work scales faster than care</h3>
+          <p>Each new clinic session adds more manual tracking rather than reusable flow.</p>
         </div>
-        <div class="story-block problem fade-up delay-4">
-          <div class="story-role">Consultant</div>
-          <ul class="story-list">
-            <li>I want to review referrals, reports, and imaging <span>before the appointment.</span></li>
-            <li>I want to document plans and sign letters quickly <span>without admin delay.</span></li>
-          </ul>
-        </div>
-        <div class="story-block problem fade-up delay-5">
-          <div class="story-role">Owner</div>
-          <ul class="story-list">
-            <li>I want service, location, and telephony settings <span>centrally managed.</span></li>
-            <li>I want visibility of activity, audits, and invoicing <span>across the whole practice.</span></li>
-          </ul>
+        <div class="problem-signal fade-up delay-5">
+          <h3>No single operational truth</h3>
+          <p>Owners see activity in fragments instead of one live view of service performance.</p>
         </div>
       </div>
     </div>
@@ -1666,36 +1724,38 @@ p {
   <div class="slide-inner two-col">
     <div class="two-col-text">
       <div class="label fade-up">The Solution - <span class="praxo-glyph" aria-label="Praxo" role="img"><img src="assets/glyph_bounded.svg" alt="" /></span></div>
-      <h2 class="fade-up delay-1">One platform.<br><span class="highlight">Everything connected.</span></h2>
-      <p class="subtitle fade-up delay-2" style="margin-top: 16px;">Praxo turns those same user stories into one joined workflow with clear ownership for every role.</p>
-      <div class="story-grid balanced" style="margin-top: 24px;">
-        <div class="story-block solution fade-up delay-3">
-          <div class="story-role">Patient Flow</div>
-          <ul class="story-list">
-            <li>Enquiries, self-booking, and reminders <span>run in one patient journey.</span></li>
-            <li>Referrals and test results can be uploaded and reviewed <span>before consultation.</span></li>
-          </ul>
+      <h2 class="fade-up delay-1">What changes in practice.<br><span class="highlight">From fragmented to joined-up.</span></h2>
+      <p class="subtitle fade-up delay-2" style="margin-top: 16px;">Instead of repeating work by role, Praxo runs one governed workflow that carries context end-to-end.</p>
+      <div class="proof-grid">
+        <div class="proof-row fade-up delay-3">
+          <div class="proof-cell before">
+            <div class="proof-tag">Before</div>
+            <p>Appointments, referrals, and messages are managed in separate tools.</p>
+          </div>
+          <div class="proof-cell after">
+            <div class="proof-tag">With Praxo</div>
+            <p>Booking, communication, and records are handled in one connected flow.</p>
+          </div>
         </div>
-        <div class="story-block solution fade-up delay-4">
-          <div class="story-role">Practice Ops</div>
-          <ul class="story-list">
-            <li>Secretaries manage records, schedules, letters, and comms <span>from one screen.</span></li>
-            <li>Invoicing and daily/weekly reporting are built in <span>for faster closeout.</span></li>
-          </ul>
+        <div class="proof-row fade-up delay-4">
+          <div class="proof-cell before">
+            <div class="proof-tag">Before</div>
+            <p>Clinical and admin teams re-enter data and chase missing information.</p>
+          </div>
+          <div class="proof-cell after">
+            <div class="proof-tag">With Praxo</div>
+            <p>Shared context means one update is reflected everywhere it is needed.</p>
+          </div>
         </div>
-        <div class="story-block solution fade-up delay-5">
-          <div class="story-role">Clinical Work</div>
-          <ul class="story-list">
-            <li>Consultants only see assigned patients <span>with referrals and imaging ready.</span></li>
-            <li>Clinical findings, plans, and e-signatures <span>are captured with full audit trail.</span></li>
-          </ul>
-        </div>
-        <div class="story-block solution fade-up delay-6">
-          <div class="story-role">Owner Control</div>
-          <ul class="story-list">
-            <li>Settings, services, locations, and booking pages <span>are centrally configured.</span></li>
-            <li>AI provider controls, audit logs, and financial visibility <span>are available platform-wide.</span></li>
-          </ul>
+        <div class="proof-row fade-up delay-5">
+          <div class="proof-cell before">
+            <div class="proof-tag">Before</div>
+            <p>Leadership reporting depends on manual reconciliation and lagging views.</p>
+          </div>
+          <div class="proof-cell after">
+            <div class="proof-tag">With Praxo</div>
+            <p>Owners see live activity, audit trail, and financial visibility in one place.</p>
+          </div>
         </div>
       </div>
     </div>
